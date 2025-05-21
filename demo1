@@ -1,0 +1,6 @@
+npm config set python "F:\.windows-build-tools\python27\python.exe"
+
+
+npm config set node_gyp "F:\node12\node_modules\npm\node_modules\node-gyp\bin\node-gyp.js"
+
+

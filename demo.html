@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between; /* 列之间等距分布 */
+        }
+
+        .column {
+            flex: 1; /* 每列平均分配剩余空间 */
+            background-color: blue;
+            padding: 100px;
+            text-align: center;
+            margin: 0 10px; /* 列之间的间距 */
+        }
+
+        .column:first-child {
+            margin-left: 0; /* 第一列左边距为 0 */
+        }
+
+        .column:last-child {
+            margin-right: 0; /* 最后一列右边距为 0 */
+        }
+
+        .column1 {
+            background-color: red;
+        }
+        .column2 {
+            background-color: blue;
+        }
+        .column3 {
+            background-color: yellow;
+        }
+
+        .border {
+            position: relative;
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 200%;
+                height: 200%;
+                border: 1px solid #000;
+                transform: scale(0.5);
+                transform-origin: 0 0;
+                box-sizing: border-box;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="column column1">列 1ffffffffffffffffffffffffffffff毒贩夫妇反反复复凤飞飞发发发发发发发发发发发发发发</div>
+    <div class="column column2">列 2</div>
+    <div class="column column3">列 3</div>
+</div>
+
+<script src="demo8.js"></script>
+
+</body>
+</html>

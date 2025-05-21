@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Router</title>
+    <script>
+        // 路由映射表
+        const routes = {
+            '/': function () {
+                document.getElementById('content').textContent = 'Home Page';
+            },
+            '/about': function () {
+                document.getElementById('content').textContent = 'About Page';
+            },
+            '/contact': function () {
+                document.getElementById('content').textContent = 'Contact Page';
+            }
+            // 添加更多路由...
+        };
+
+        // 初始化路由，根据当前URL的hash部分
+        function initRoute() {
+            const hash = window.location.hash.slice(1); // 去除'#'字符
+            if (routes[hash]) {
+                routes[hash](); // 调用对应的路由处理函数
+            } else {
+                routes['/'](); // 默认路由
+            }
+        }
+
+        // 监听hash变化事件
+        window.addEventListener('hashchange', function () {
+            initRoute();
+        });
+
+        // 页面加载时初始化路由
+        window.onload = initRoute;
+    </script>
+</head>
+<body>
+
+<nav>
+    <a href="#/">Home</a> |
+    <a href="#/about">About</a> |
+    <a href="#/contact">Contact</a>
+</nav>
+
+<div id="content"></div> <!-- 这里显示路由内容 -->
+
+</body>
+</html>

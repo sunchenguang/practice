@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            margin: 100px;
+            /* 添加透视效果 */
+            perspective: 500px;
+        }
+
+        .inner-box {
+            width: 100%;
+            height: 100%;
+            background-color: red;
+            /* 使用 translate3D 进行平移 */
+            transform: translate3D(50px, 50px, 50px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="inner-box"></div>
+    </div>
+</body>
+
+</html>
