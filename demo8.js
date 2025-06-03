@@ -252,16 +252,15 @@ function deepClone(obj) {
 
 
 function extend(A, B) {
-    function F() {
+    function F() {}
 
-    }
-
-    F.prototype = B;
+    F.prototype = B.prototype;
 
     A.prototype = new F();
 
     A.prototype.constructor = A;
 
+    return A;
 }
 
 function flatten(arr, depth) {

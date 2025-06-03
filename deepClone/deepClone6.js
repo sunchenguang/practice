@@ -1,8 +1,9 @@
 function structuralClone(obj) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         const { port1, port2 } = new MessageChannel();
         port1.onmessage = ev => {
             resolve(ev.data);
+
             port1.close();
             port2.close();
         };

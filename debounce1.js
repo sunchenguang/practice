@@ -1,13 +1,13 @@
 function debounce1(func, time) {
-    let timer
+    let timer;
 
     return function (...args) {
-        clearTimeout(timer)
+        clearTimeout(timer);
 
         timer = setTimeout(function () {
-            func.apply(this, args)
-        }, time)
-    }
+            func.apply(this, args);
+        }, time);
+    };
 }
 
 function throttle(func, time) {
@@ -19,7 +19,30 @@ function throttle(func, time) {
             func.apply(this, args);
             setTimeout(() => {
                 inThrottle = false;
-            }, time)
+            }, time);
         }
-    }
+    };
 }
+
+function throttle2(func, time) {
+    let lastTime = 0;
+    let timer;
+
+
+    return function (...args) {
+        const now = Date.now();
+        if (now - lastTime >= time) {
+            lastTime = now;
+            func.apply(this, args);
+        } else {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                func.apply(this, args);
+                lastTime = now;
+            }, time);
+        }
+    };
+}
+
+
+

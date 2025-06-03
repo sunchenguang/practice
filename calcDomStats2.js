@@ -8,9 +8,9 @@ function calcDomStats2(dom) {
     while (queue.length > 0) {
         const node = queue.shift();
         stats.totalNodes++;
-        if (node.nodeType === 3) {
+        if (node.nodeType === Node.TEXT_NODE) {
             stats.totalTextNodes++; 
-        } else if (node.nodeType === 1) {
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
             stats.totalElements++;
         }
         if (node.children) {

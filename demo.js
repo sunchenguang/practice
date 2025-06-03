@@ -162,7 +162,7 @@ let k = 3;
     };
     Object.defineProperty(person, 'fullName', {
         get: function () {
-            return firstName + ' ' + lastName;
+            return this.firstName + ' ' + this.lastName;
         },
         set: function (name) {
             var words = name.split(' ');
