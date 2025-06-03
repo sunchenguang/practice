@@ -22,6 +22,8 @@ function climbStairs(n) {
 }
 
 
+
+
 /**
  * 爬楼梯问题（递归解法）
  * 基本思想：使用递归和记忆化搜索
@@ -31,14 +33,20 @@ function climbStairs(n) {
  * @returns {number} - 爬到第n阶的方法数
  */
 function climbStairs2(n) {
-    if (n <= 2) return n
-    const f = [];
-
-    if (!f[n]) {
-        f[n] = climbStairs2(n - 1) + climbStairs2(n - 2)
+    if (n <= 2) return n;
+    
+    // 使用闭包保存计算结果,避免重复计算
+    const memo = new Array(n + 1).fill(0);
+    memo[1] = 1;
+    memo[2] = 2;
+    
+    function climb(i) {
+        if (memo[i] > 0) return memo[i];
+        memo[i] = climb(i - 1) + climb(i - 2);
+        return memo[i];
     }
-
-    return f[n]
+    
+    return climb(n);
 }
 
 

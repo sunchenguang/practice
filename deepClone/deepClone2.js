@@ -11,11 +11,7 @@ function cloneDeep4(source, hash = new WeakMap()) {
     hash.set(source, target);
 
     Reflect.ownKeys(source).forEach(key => { // 改动
-        if (isObject(source[key])) {
-            target[key] = cloneDeep4(source[key], hash);
-        } else {
-            target[key] = source[key];
-        }
+        target[key] = isObject(source[key]) ? cloneDeep4(source[key], hash) : source[key];
     });
     return target;
 }
