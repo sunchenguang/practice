@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      /* 设置背景图，生成 FP 指标 */
+      #root {
+        height: 100px;
+        background: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // 模拟框架渲染，1s 后在页面呈现有效内容
+      setTimeout(() => {
+        root.innerHTML = "content";
+        
+      }, 1000);
+
+      window.onload = function () {
+        const observer = new PerformanceObserver(function(entryList) {
+          const perfEntries = entryList.getEntries();
+          for (const perfEntry of perfEntries) {
+            if (perfEntry.name === "first-paint") {
+              const FP = perfEntry;
+              console.log("首次像素绘制 时间：", `FP: ${FP?.startTime}ms`); // 674ms（div 设有背景图，会在元素渲染时生成 FP 指标）
+            } else if (perfEntry.name === "first-contentful-paint") {
+              const FCP = perfEntry;
+              console.log("首次内容绘制 时间：", `FCP: ${FCP?.startTime}ms`); // 1174ms
+              observer.disconnect(); // 断开观察，不再观察了
+            }
+          }
+        });
+
+        // 观察 paint 相关性能指标
+        observer.observe({ entryTypes: ["paint"] });
+      };
+    </script>
+  </body>
+</html>

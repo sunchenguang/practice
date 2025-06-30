@@ -5,7 +5,7 @@ function deepClone(obj) {
     const clone = Array.isArray(obj) ? [] : {};
     for (const key in obj) {
         if (obj.hasOwnProperty(key)) {
-            clone[key] = deepClone(obj[key])
+            clone[key] = deepClone(obj[key]);
         }
     }
 
@@ -223,7 +223,7 @@ function extends1() {
 
     SuperType.prototype.getType = function () {
         return this.type;
-    }
+    };
 
     function SubType() {
         this.type = 'sub';
@@ -246,10 +246,10 @@ function extends2() {
 
     SuperType.prototype.getType = function () {
         return this.type;
-    }
+    };
 
     function SubType(type) {
-        SuperType.call(this, type)
+        SuperType.call(this, type);
     }
 
     SubType.prototype = new SuperType();
@@ -266,7 +266,7 @@ function extends3() {
 
     SuperType.prototype.getType = function () {
         return this.type;
-    }
+    };
 
     function SubType(type) {
         SuperType.call(this, type);
@@ -281,7 +281,7 @@ function extends3() {
 
 function myNew(fn, ...args) {
     const obj = Object.create(fn.prototype);
-    const result = fn.apply(obj, args)
+    const result = fn.apply(obj, args);
     return typeof result === 'object' && result !== null ? result : obj;
 }
 

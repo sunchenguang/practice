@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <button id="longTaskBtn">执行longTask</button>
+
+        <script>
+            // 默认长任务
+            const longTaskBtn = document.getElementById("longTaskBtn");
+            function longTask() {
+                const start = Date.now();
+                console.log("longTask开始 start");
+                while (Date.now() < 1000 + start) {}
+                console.log("longTask结束 end，耗时：", Date.now() - start);
+            }
+            longTaskBtn.addEventListener("click", longTask);
+        </script>
+
+        <script>
+            // 观察长任务
+            new PerformanceObserver((list) => {
+                list.getEntries().forEach((entry) => {
+                    // 设定卡顿阈值：执行时长大于 500 ms
+                    if (entry.duration > 500) {
+                        console.log(
+                            "执行的长任务耗时：",
+                            entry.duration,
+                            entry
+                        );
+                    }
+                });
+            }).observe({ entryTypes: ["longtask"] });
+
+            function addLinkTag(src, { rel, crossoriginVal }) {
+                const tag = document.createElement("link");
+                tag.rel = rel;
+                tag.href = src;
+                // enable crossorigin so that prefetch cache works for
+                // Cross Origin Isolation status.
+                if (crossoriginVal !== undefined) {
+                    tag.setAttribute("crossorigin", crossoriginVal);
+                }
+                const head = document.querySelector("head");
+                if (head && head.appendChild) {
+                    head.appendChild(tag);
+                }
+            }
+            addLinkTag("<https://your-domain.com/static/main.h1712oidw.js>", {
+                rel: "preferch",
+            });
+
+            addLinkTag("<https://your-domain.com>", { rel: "preconnect" });
+            addLinkTag("<https://your-domain.com>", { rel: "dns-prefetch" });
+        </script>
+    </body>
+</html>
