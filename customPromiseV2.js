@@ -73,14 +73,16 @@ MyPromise.race = promises => new MyPromise((resolve, reject) => {
 MyPromise.all = promises => new MyPromise((resolve, reject) => {
     let len = promises.length;
     let res = [];
+    if (len === 0) {
+        return resolve(res);
+    }
     promises.forEach((p, i) => {
-        p.then(r => {
-            if (len === 1) {
-                resolve(res);
-            } else {
-                res[i] = r;
-            }
+        MyPromise.resolve(p).then(r => {
+            res[i] = r;
             len--;
+            if (len === 0) {
+                resolve(res);
+            }
         }, reject);
     });
 });
